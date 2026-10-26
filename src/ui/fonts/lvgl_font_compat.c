@@ -48,8 +48,7 @@ __attribute__((weak)) bool lv_font_get_glyph_dsc_fmt_txt(
         return false;
     }
 
-    bool is_tab = unicode_letter == '\t';
-    if (is_tab) {
+    if (unicode_letter == '\t') {
         unicode_letter = ' ';
     }
 
@@ -76,10 +75,6 @@ __attribute__((weak)) bool lv_font_get_glyph_dsc_fmt_txt(
     dsc_out->format = LV_FONT_GLYPH_FORMAT_A1;
     dsc_out->is_placeholder = false;
     dsc_out->gid.index = glyph_id;
-
-    if (is_tab) {
-        dsc_out->adv_w *= 2;
-    }
 
     return true;
 }

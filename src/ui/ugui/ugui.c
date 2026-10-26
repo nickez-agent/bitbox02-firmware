@@ -170,7 +170,7 @@ static bool _UG_GlyphPixelSet(
 }
 
 static void _UG_DrawGlyph(
-    lv_font_glyph_dsc_t* glyph_dsc, const UG_FONT* font, uint32_t codepoint,
+    lv_font_glyph_dsc_t* glyph_dsc, const UG_FONT* font,
     UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc)
 {
     const lv_font_t* resolved_font = glyph_dsc->resolved_font;
@@ -184,7 +184,7 @@ static void _UG_DrawGlyph(
     }
 
     const uint8_t* bitmap = NULL;
-    if (codepoint != '\t' && glyph_dsc->box_w != 0 && glyph_dsc->box_h != 0 &&
+    if (glyph_dsc->box_w != 0 && glyph_dsc->box_h != 0 &&
         resolved_font->get_glyph_bitmap != NULL) {
         bitmap = (const uint8_t*)resolved_font->get_glyph_bitmap(glyph_dsc, NULL);
     }
@@ -293,7 +293,7 @@ static void _UG_PutString( UG_S16 x, UG_S16 y, UG_S16 *xout, UG_S16 *yout, const
 
         if (!calconly) {
             _UG_DrawGlyph(
-                &glyph, gui->font, codepoint, xp, yp, gui->fore_color, gui->back_color);
+                &glyph, gui->font, xp, yp, gui->fore_color, gui->back_color);
         }
 
         xp += cw + gui->char_h_space;
@@ -907,7 +907,7 @@ void UG_PutChar( char chr, UG_S16 x, UG_S16 y, UG_COLOR fc, UG_COLOR bc )
 
     lv_font_glyph_dsc_t glyph;
     if (_UG_GetGlyph(gui->font, (UG_U8)chr, &glyph)) {
-        _UG_DrawGlyph(&glyph, gui->font, (UG_U8)chr, x, y, fc, bc);
+        _UG_DrawGlyph(&glyph, gui->font, x, y, fc, bc);
     }
 }
 
